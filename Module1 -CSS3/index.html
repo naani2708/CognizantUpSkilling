@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Local Community Event Portal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body onbeforeunload="return checkUnsaved()">
+
+    <!-- Navigation -->
+    <header id="mainHeader">
+
+        <h1 style="color:red;">Local Community Event Portal</h1>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="help.html" target="_blank">Help</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <section id="home">
+
+        <div id="welcomeBanner">
+            Welcome Resident!
+
+            <span class="offer">
+                Special Offer: Free Event Pass
+            </span>
+        </div>
+
+        <p class="highlight">
+            Stay informed about local community activities and events.
+        </p>
+
+    </section>
+
+    <section id="events">
+
+        <h2>Upcoming Events</h2>
+
+        <div class="event-grid">
+
+            <div class="eventCard">
+                <h3>Music Festival</h3>
+                <p>Enjoy live performances and food stalls.</p>
+            </div>
+
+            <div class="eventCard">
+                <h3>Sports Meet</h3>
+                <p>Participate in exciting sports competitions.</p>
+            </div>
+
+            <div class="eventCard">
+                <h3>Art Exhibition</h3>
+                <p>Explore local artists and their creations.</p>
+            </div>
+
+        </div>
+
+    </section>
+    <section id="gallery">
+
+        <h2>Community Event Gallery</h2>
+
+        <table>
+
+            <tr>
+                <td>
+                    <img src="https://via.placeholder.com/180x120"
+                        alt="Music Festival"
+                        title="Music Festival"
+                        class="gallery-img"
+                        ondblclick="enlargeImage(this)">
+                    <p>Music Festival</p>
+                </td>
+
+                <td>
+                    <img src="https://via.placeholder.com/180x120"
+                        alt="Food Fair"
+                        title="Food Fair"
+                        class="gallery-img"
+                        ondblclick="enlargeImage(this)">
+                    <p>Food Fair</p>
+                </td>
+
+                <td>
+                    <img src="https://via.placeholder.com/180x120"
+                        alt="Sports Meet"
+                        title="Sports Meet"
+                        class="gallery-img"
+                        ondblclick="enlargeImage(this)">
+                    <p>Sports Meet</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <img src="https://via.placeholder.com/180x120"
+                        alt="Art Expo"
+                        title="Art Expo"
+                        class="gallery-img"
+                        ondblclick="enlargeImage(this)">
+                    <p>Art Expo</p>
+                </td>
+
+                <td>
+                    <img src="https://via.placeholder.com/180x120"
+                        alt="Book Fair"
+                        title="Book Fair"
+                        class="gallery-img"
+                        ondblclick="enlargeImage(this)">
+                    <p>Book Fair</p>
+                </td>
+
+                <td>
+                    <img src="https://via.placeholder.com/180x120"
+                        alt="Charity Run"
+                        title="Charity Run"
+                        class="gallery-img"
+                        ondblclick="enlargeImage(this)">
+                    <p>Charity Run</p>
+                </td>
+            </tr>
+
+        </table>
+
+    </section>
+    <section>
+
+        <h2>Event Registration</h2>
+
+        <form id="eventForm">
+
+            <input type="text"
+                placeholder="Enter Name"
+                required
+                autofocus>
+
+            <input type="email"
+                placeholder="Enter Email"
+                required>
+
+            <input type="date"
+                required>
+
+            <select id="eventType"
+                onchange="showFee(); savePreference();">
+
+                <option value="">Select Event</option>
+                <option value="Music">Music Event</option>
+                <option value="Sports">Sports Event</option>
+                <option value="Art">Art Event</option>
+
+            </select>
+
+            <p id="fee"></p>
+
+            <input type="text"
+                id="phone"
+                placeholder="Phone Number"
+                onblur="validatePhone()">
+
+            <textarea id="feedback"
+                rows="5"
+                placeholder="Enter Feedback"
+                onkeyup="countCharacters()"></textarea>
+
+            <p>
+                Characters Typed:
+                <span id="charCount">0</span>
+            </p>
+
+            <button type="button"
+                onclick="submitForm()">
+                Register
+            </button>
+
+            <br><br>
+
+            <output id="confirmation"></output>
+
+        </form>
+
+    </section>
+    <section>
+
+        <h2>Event Promo Video</h2>
+
+        <video width="500"
+            controls
+            oncanplay="videoReady()">
+
+            <source src="sample.mp4" type="video/mp4">
+
+        </video>
+
+        <p id="videoMessage"></p>
+
+    </section>
+    <section>
+
+        <h2>Find Nearby Events</h2>
+
+        <button onclick="findNearbyEvents()">
+            Find Nearby Events
+        </button>
+
+        <p id="locationResult"></p>
+
+    </section>
+    <section class="news-section">
+
+        <h2>Community Bulletin</h2>
+
+        <p>
+            Community programs, awareness drives, cultural festivals,
+            sports competitions, and educational workshops are conducted
+            throughout the year. Residents are encouraged to participate
+            actively and contribute towards community development.
+        </p>
+
+    </section>
+    <section id="contact">
+
+        <h2>Contact Us</h2>
+
+        <p>Email: community@example.com</p>
+        <p>Phone: +91 9876543210</p>
+
+    </section>
+
+    <button onclick="clearPreferences()">
+        Clear Preferences
+    </button>
+
+    <footer>
+        <p>© 2026 Local Community Event Portal</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
